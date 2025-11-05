@@ -2,3 +2,61 @@ h1{
     font-size: 20px;
 }
 
+const marca = [
+    { nombre: "compu", precio: 15000, categoria: "tecnologia" },
+    { nombre: "Mouse", precio: 300, categoria: "tecnologia" },
+    { nombre: "Teclado", precio: 800, categoria: "tecnologia" },
+    { nombre: "Monitor", precio: 4500, categoria: "tecnologia" },
+    { nombre: "Auriculares", precio: 1200, categoria: "tecnologia" },
+    { nombre: "Router", precio: 2000, categoria: "tecnologia" },
+    { nombre: "telefono", precio: 8000, categoria: "tecnologia" },
+    { nombre: "SillaGamer", precio: 3500, categoria: "muebles" },
+    { nombre: "tenis", precio: 2000, categoria: "ropa" },
+    { nombre: "Escritorio", precio: 4000, categoria: "muebles" },
+    { nombre: "blusa", precio: 500, categoria: "ropa" },
+    { nombre: "Cafetera", precio: 1800, categoria: "cafe" },
+    { nombre: "CamisaGodin", precio: 100, categoria: "ropa" },
+    { nombre: "Pantalon", precio: 1200, categoria: "ropa" },
+    { nombre: "taza", precio: 300, categoria: "cafe" }
+];
+
+
+
+const totalProductos = marca.length;
+// REDUCE para sumar
+const sumaPrecios = marca.reduce((acumulador, producto) => acumulador + producto.precio, 0);
+const costoPromedio = sumaPrecios / totalProductos;
+
+console.log(`Total de Productos: ${totalProductos}`);
+console.log(`Costo Promedio General: $${costoPromedio.toFixed(2)}`);
+
+
+// SORT para ordenar de mayor a menor precio
+const marcaOrdenada = [...marca].sort((a, b) => b.precio - a.precio);
+
+// FILTER para obtener productos que superan el promedio
+const productosMasCarosQueElPromedio = marcaOrdenada.filter(
+    producto => producto.precio > costoPromedio
+);
+
+console.log(`Productos más caros que el promedio ($${costoPromedio.toFixed(2)}):`);
+productosMasCarosQueElPromedio.forEach(producto => {
+    console.log(`   - ${producto.nombre} ($${producto.precio})`);
+});
+
+
+// FILTER para clasificar los productos por precio
+const productosBaratos = marca.filter(producto => producto.precio < 1000);
+const productosNormales = marca.filter(producto => producto.precio >= 1000 && producto.precio <= 5000);
+const productosLujo = marca.filter(producto => producto.precio > 5000);
+
+console.log("Productos de Lujo (> $5000):");
+productosLujo.forEach(p => console.log(`   - ${p.nombre} ($${p.precio})`));
+
+console.log("\n mid Productos Normales ($1000 - $5000):");
+productosNormales.forEach(p => console.log(`   - ${p.nombre} ($${p.precio})`));
+
+console.log("\n low Productos Baratos (< $1000):");
+productosBaratos.forEach(p => console.log(`   - ${p.nombre} ($${p.precio})`));
+
+
